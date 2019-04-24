@@ -28,12 +28,6 @@ RUN ln -s /usr/lib64/libfdfsclient.so /usr/local/lib/libfdfsclient.so
 WORKDIR ${TEMP_PATH}/fastdfs-master
 RUN ./make.sh && ./make.sh install
 
-# configuration
-# WORKDIR /etc/fdfs
-# RUN cp storage.conf.sample storage.conf
-# RUN sed -itracker.conf.bak 's/\/home\/yuqing\/fastdfs\/data/\/data\/fastdfs/g' storage.conf
-# RUN sed -itracker.conf.bak 's/\/home\/yuqing\/fastdfs/\/var\/fastdfs/g' storage.conf
-
 EXPOSE 23000
 
 CMD ["/bin/bash", "-c", "fdfs_storaged /etc/fdfs/storage.conf start && sleep 5 && tail -F --pid=`cat /var/fastdfs/data/fdfs_storaged.pid` /dev/null"]
